@@ -1,5 +1,5 @@
 {
-    "name": "kelly.fun",
+    "name": "kellz.fun",
     "version": "0.1.0",
     "private": true,
     "scripts": {
@@ -13,7 +13,8 @@
         "next": "15.1.6",
         "open": "^10.1.0",
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "react-dom": "^19.0.0",
+        "tesseract.js": "^6.0.0"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",

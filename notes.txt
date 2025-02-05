@@ -8,3 +8,7 @@ Layouts	                            Layouts can be nested and dynamic	          
 Dynamic routes	                    Supported, but syntax differs	                    Supported
 Client-side navigation	            Supported with router.push	                        Supported with Link component
 Priority	                        Takes precedence over Page Router	                Fallback if no matching route in App Router
+
+
+OCR to detect Make/Model of cars:
+- Tesseract.js does not work well with selected images
