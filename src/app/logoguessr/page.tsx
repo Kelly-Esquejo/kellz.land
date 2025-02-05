@@ -2,8 +2,8 @@
 //icons8.com/icons/color-pixels
 import React from "react";
 
-function GuessLogo() {
+function LogoGuessr() {
     return <div>Guess the Logo</div>;
 }
 
-export default GuessLogo;
+export default LogoGuessr;
