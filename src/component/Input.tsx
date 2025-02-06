@@ -1,7 +1,7 @@
 import { ChangeEvent, FC } from "react";
 
 interface InputProps {
-    type: "text" | "number" | "email" | "password";
+    type: "text" | "number";
     label: string;
     value: string | number;
     name: string;
@@ -25,11 +25,16 @@ const Input: FC<InputProps> = ({
     inputClassName,
     onChange,
 }) => {
+    const showError =
+        error &&
+        (type === "text" ? value === "" : value === null || value === "");
+
     return (
         <div className="input-wrapper">
             <label htmlFor={label} className={labelClassName}>
                 {label}
             </label>
+
             <input
                 className={inputClassName}
                 type={type}
@@ -40,7 +45,6 @@ const Input: FC<InputProps> = ({
                 onChange={onChange}
                 disabled={disabled}
             />
-            {error && <p className="error">Input filed can't be empty!</p>}
         </div>
     );
 };
