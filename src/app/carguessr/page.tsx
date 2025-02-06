@@ -63,22 +63,22 @@ const CarGuessr: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen w-full gap-4">
+        <div className="flex flex-col items-center justify-center h-screen w-full gap-4 pt-4 pb-4">
+            {" "}
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Car Guessr
             </h1>
             {/* Processed Image with Hidden Logos */}
-            <div className="overflow-hidden">
+            <div className="relative overflow-hidden flex justify-center items-center">
                 <Image
-                    className="w-[900px] h-[600px] items-center justify-center object-contain"
+                    className="w-[75vw] max-w-[900px] h-[75vh] object-contain"
                     src={carImage}
                     alt="Car"
                     width={900}
                     height={600}
                 />
             </div>
-
-            <div className="flex flex-col items-center justify-center gap-4 w-full">
+            <div className="h-auto flex flex-col items-center justify-center gap-4 w-full">
                 <form className="w-full flex gap-4 items-center justify-center">
                     <Input
                         labelClassName="block uppercase tracking-wide text-gray-950 text-xs font-bold mb-2"
@@ -115,7 +115,7 @@ const CarGuessr: React.FC = () => {
                         placeholder="1966"
                     />
                 </form>
-                <footer className="">
+                <footer className="flex gap-4">
                     <button
                         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                         type="submit"
