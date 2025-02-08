@@ -30,7 +30,7 @@ const Input: FC<InputProps> = ({
         (type === "text" ? value === "" : value === null || value === "");
 
     return (
-        <div className="input-wrapper">
+        <div>
             <label htmlFor={label} className={labelClassName}>
                 {label}
             </label>

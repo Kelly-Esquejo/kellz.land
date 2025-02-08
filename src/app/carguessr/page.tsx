@@ -64,7 +64,6 @@ const CarGuessr: React.FC = () => {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen w-full gap-4 pt-4 pb-4">
-            {" "}
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Car Guessr
             </h1>
@@ -78,11 +77,11 @@ const CarGuessr: React.FC = () => {
                     height={600}
                 />
             </div>
-            <div className="h-auto flex flex-col items-center justify-center gap-4 w-full">
-                <form className="w-full flex gap-4 items-center justify-center">
+            <div className="h-auto flex flex-col items-center justify-center gap-4 w-full pl-4 pr-4">
+                <form className="flex md gap-4 w-full items-center justify-center">
                     <Input
-                        labelClassName="block uppercase tracking-wide text-gray-950 text-xs font-bold mb-2"
-                        inputClassName="shadow appearance-none borderrounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        labelClassName="block uppercase tracking-wide text-gray-950 sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2"
+                        inputClassName="shadow appearance-none border rounded w-full  sm:w-auto text-xs sm:text-sm md:text-base max-w-xs py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="text"
                         label="Make"
                         value={make}
@@ -92,8 +91,8 @@ const CarGuessr: React.FC = () => {
                         placeholder="Shelby"
                     />
                     <Input
-                        labelClassName="block uppercase tracking-wide text-gray-950 text-xs font-bold mb-2"
-                        inputClassName="shadow appearance-none borderrounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        labelClassName="block uppercase tracking-wide text-gray-950  sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2"
+                        inputClassName="shadow appearance-none border rounded w-full  sm:w-auto text-xs sm:text-sm md:text-base max-w-xs py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="text"
                         label="Model"
                         value={model}
@@ -102,10 +101,9 @@ const CarGuessr: React.FC = () => {
                         onChange={handleModelChange}
                         placeholder="427 Cobra"
                     />
-
                     <Input
-                        labelClassName="block uppercase tracking-wide text-gray-950 text-xs font-bold mb-2"
-                        inputClassName="shadow appearance-none borderrounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        labelClassName="block uppercase tracking-wide text-gray-950  sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2"
+                        inputClassName="shadow appearance-none border rounded w-full  sm:w-auto text-xs sm:text-sm md:text-base max-w-xs py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="number"
                         label="Year"
                         value={year}
@@ -115,16 +113,11 @@ const CarGuessr: React.FC = () => {
                         placeholder="1966"
                     />
                 </form>
-                <footer className="flex gap-4">
-                    <button
-                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                        type="submit"
-                        onClick={handleSubmit}>
+                <footer className="flex flex-wrap gap-4 justify-center w-full">
+                    <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
                         Submit
                     </button>
-                    <button
-                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                        onClick={getRandomCar}>
+                    <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
                         New Car
                     </button>
                 </footer>

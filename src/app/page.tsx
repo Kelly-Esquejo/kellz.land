@@ -20,6 +20,9 @@ export default function Home() {
                         <Link href="/carguessr">Car Guessr</Link>
                     </div>
                     <div className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
+                        <Link href="/joke">Joke</Link>
+                    </div>
+                    <div className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
                         <Link href="/guessthelogo">Logo Guessr</Link>
                     </div>
                     <div className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
@@ -39,7 +42,6 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer">
                         <Image
-                            aria-hidden
                             src="/window.svg"
                             alt="Window icon"
                             width={16}
@@ -53,7 +55,6 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer">
                         <Image
-                            aria-hidden4
                             src="/globe.svg"
                             alt="Globe icon"
                             width={16}
