@@ -34,8 +34,8 @@ const JokeGenerator: React.FC = () => {
     };
 
     return (
-        <div className="h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <div className="flex flex-col items-center gap-16">
+        <div className="h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] ">
+            <div className="h-[400px] w-[400px] flex flex-col justify-between items-center border-solid border-[5px] border-[#b2a293] p-12">
                 {/* Joke container stays centered and does not affect layout */}
                 <div className="text-center min-h-[80px] min-w-[80px]">
                     {isLoading ? (
