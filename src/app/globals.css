@@ -19,3 +19,40 @@ body {
     background: var(--background);
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.scroller {
+    overflow: hidden;
+    -webkit-mask: linear-gradient(
+        90deg,
+        transparent,
+        white 20%,
+        white 80%,
+        transparent
+    );
+    mask: linear-gradient(
+        90deg,
+        transparent,
+        white 20%,
+        white 80%,
+        transparent
+    );
+}
+
+/* global.css */
+
+@keyframes infinite_scroll {
+    to {
+        transform: translateX(calc(-30% - 0.25rem));
+    }
+}
+
+.scroller .scroll__inner {
+    display: flex;
+    width: fit-content;
+    flex-wrap: nowrap;
+    animation: infinite_scroll 10s linear infinite;
+}
+
+.scroll__inner:hover {
+    animation-play-state: paused;
+}

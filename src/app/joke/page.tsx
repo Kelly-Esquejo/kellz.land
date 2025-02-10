@@ -21,9 +21,8 @@ const JokeGenerator: React.FC = () => {
     const fetchJoke = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch(
-                "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit"
-            );
+            //https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit
+            const response = await fetch("https://v2.jokeapi.dev/joke/Any");
             const data: Joke = await response.json();
             setJoke(data);
         } catch (error) {
@@ -34,9 +33,9 @@ const JokeGenerator: React.FC = () => {
     };
 
     return (
-        <div className="h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] ">
-            <div className="h-[400px] w-[400px] flex flex-col justify-between items-center border-solid border-[5px] border-[#b2a293] p-12">
-                {/* Joke container stays centered and does not affect layout */}
+        <div className="h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[url('/background.jpg')] bg-cover bg-center">
+            {/* Glass morphism */}
+            <div className="h-[400px] w-[400px] flex flex-col justify-between items-center border-solid border-[2px] border-[#b2a293] p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 ">
                 <div className="text-center min-h-[80px] min-w-[80px]">
                     {isLoading ? (
                         <div>Loading...</div>
@@ -54,7 +53,7 @@ const JokeGenerator: React.FC = () => {
                 {/* Button stays centered and retains normal size */}
                 <button
                     onClick={fetchJoke}
-                    className="fold-bold relative rounded border-2 border-black bg-white  py-1 font-bold text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900  border-solid border-transparent flex items-center justify-center bg-foreground text-background gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
+                    className="font-bold relative rounded border-2 border-black bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
                     Click Me!
                 </button>
             </div>

@@ -1,5 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import InfiniteCarousel from "@/component/InfiniteCarousel";
+
+const logos = [
+    { src: "/logo-car-guessr.png", url: "/carguessr" },
+    { src: "/logo-joke.png", url: "/joke" },
+    { src: "/logo-guesslogo.png", url: "/guessthelogo" },
+    { src: "/logo-food-guessr.png", url: "/foodle" },
+    { src: "/logo-reaction.png", url: "/reactiontraining" },
+];
 
 export default function Home() {
     return (
@@ -15,24 +24,10 @@ export default function Home() {
                     </li>
                 </ul>
 
-                <div className="flex gap-4 items-center flex-col sm:flex-row">
-                    <div className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-                        <Link href="/carguessr">Car Guessr</Link>
-                    </div>
-                    <div className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-                        <Link href="/joke">Joke</Link>
-                    </div>
-                    <div className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-                        <Link href="/guessthelogo">Logo Guessr</Link>
-                    </div>
-                    <div className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-                        <Link href="/foodle">foodle</Link>
-                    </div>
-                    <div className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-                        <Link href="/aimtraining">Aim Training</Link>
-                    </div>
-                </div>
+                {/* button for links */}
+                <InfiniteCarousel items={logos} />
             </main>
+
             <footer className="flex row-start-3 gap-6 flex-wrap items-center justify-center">
                 <h3>I'm Kelly</h3>
                 <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
