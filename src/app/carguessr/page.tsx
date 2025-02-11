@@ -61,7 +61,13 @@ const CarGuessr: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen w-full gap-4 pt-4 pb-4">
+        <div
+            className="flex flex-col items-center justify-center h-screen w-full gap-4 pt-4 pb-4"
+            style={{
+                backgroundImage: "url('/bgcar.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}>
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Car Guessr
             </h1>
@@ -113,12 +119,12 @@ const CarGuessr: React.FC = () => {
                     />
                 </form>
                 <footer className="flex flex-wrap gap-4 justify-center w-full">
+                    <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
+                        Submit
+                    </button>
                     <button
                         onClick={getRandomCar}
                         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
-                        Submit
-                    </button>
-                    <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
                         New Car
                     </button>
                 </footer>
