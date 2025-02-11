@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import InfiniteCarousel from "@/component/InfiniteCarousel";
-
+import CarLogo from "../../public/carguessr.png";
 const logos = [
     {
-        src: "/carguessr.png",
+        src: { CarLogo },
         url: "/carguessr",
         alt: "Car logo",
         className: "coming-soon",
