@@ -12,7 +12,6 @@ const logos = [
         src: "joke.png",
         url: "/joke",
         alt: "Joke",
-        className: "coming-soon",
     },
     {
         src: "guess.png",
@@ -66,7 +65,8 @@ export default function Home() {
                         href="https://www.linkedin.com/in/kelly-esquejo/"
                         target="_blank"
                         rel="noopener noreferrer">
-                        <img
+                        <Image
+                            unoptimized
                             src="window.svg"
                             alt="Window icon"
                             width={16}

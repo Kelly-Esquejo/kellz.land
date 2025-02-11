@@ -22,6 +22,7 @@ const JokeGenerator: React.FC = () => {
         setIsLoading(true);
         try {
             //https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit
+            //https://v2.jokeapi.dev/joke/Any
             const response = await fetch("https://v2.jokeapi.dev/joke/Any");
             const data: Joke = await response.json();
             setJoke(data);
@@ -33,7 +34,13 @@ const JokeGenerator: React.FC = () => {
     };
 
     return (
-        <div className="h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-[url('/background.jpg')] bg-cover bg-center">
+        <div
+            className="h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] "
+            style={{
+                backgroundImage: "url('/background.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}>
             {/* Glass morphism */}
             <div className="h-[400px] w-[400px] flex flex-col justify-between items-center border-solid border-[2px] border-[#b2a293] p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 ">
                 <div className="text-center min-h-[80px] min-w-[80px]">
