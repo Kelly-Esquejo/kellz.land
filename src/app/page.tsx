@@ -3,31 +3,31 @@ import Image from "next/image";
 import InfiniteCarousel from "@/component/InfiniteCarousel";
 const logos = [
     {
-        src: "/kellz.land/carguessr.png",
+        src: "/carguessr/carguessr.PNG",
         url: "/carguessr",
         alt: "Car logo",
         className: "coming-soon",
     },
     {
-        src: "/kellz.land/joke.png",
+        src: "/joke/joke.PNG",
         url: "/joke",
         alt: "Joke",
         className: "coming-soon",
     },
     {
-        src: "/kellz.land/guess.png",
+        src: "/guess/guess.PNG",
         url: "/guessthelogo",
         alt: "Guess Logo",
         className: "coming-soon",
     },
     {
-        src: "/kellz.land/foodguessr.png",
+        src: "/foodguessr/foodguessr.PNG",
         url: "/foodle",
         alt: "Food Guessr Logo",
         className: "coming-soon",
     },
     {
-        src: "/kellz.land/reaction.png",
+        src: "/reaction/reaction.PNG",
         url: "/reactiontraining",
         alt: "Reaction Training Logo",
         className: "coming-soon",
@@ -67,7 +67,7 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer">
                         <img
-                            src="/kellz.land/window.svg"
+                            src="/window/window.SVG"
                             alt="Window icon"
                             width={16}
                             height={16}
@@ -80,7 +80,7 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer">
                         <img
-                            src="/kellz.land/globe.svg"
+                            src="/globe.SVG"
                             alt="Globe icon"
                             width={16}
                             height={16}
