@@ -3,33 +3,64 @@ import Link from "next/link";
 import InfiniteCarousel from "@/component/InfiniteCarousel";
 
 const logos = [
-    { src: "/logo-car-guessr.png", url: "/carguessr" },
-    { src: "/logo-joke.png", url: "/joke" },
-    { src: "/logo-guesslogo.png", url: "/guessthelogo" },
-    { src: "/logo-food-guessr.png", url: "/foodle" },
-    { src: "/logo-reaction.png", url: "/reactiontraining" },
+    {
+        src: "/logo-car-guessr.png",
+        url: "/carguessr",
+        alt: "Car logo",
+        className: "coming-soon",
+    },
+    {
+        src: "/logo-joke.png",
+        url: "/joke",
+        alt: "Joke",
+        className: "coming-soon",
+    },
+    {
+        src: "/logo-guesslogo.png",
+        url: "/guessthelogo",
+        alt: "Guess Logo",
+        className: "coming-soon",
+    },
+    {
+        src: "/logo-food-guessr.png",
+        url: "/foodle",
+        alt: "Food Guessr Logo",
+        className: "coming-soon",
+    },
+    {
+        src: "/logo-reaction.png",
+        url: "/reactiontraining",
+        alt: "Reaction Training Logo",
+        className: "coming-soon",
+    },
 ];
 
 export default function Home() {
     return (
         <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+            <header>
+                <h1 className="">kellz.land</h1>
+            </header>
             <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-                <h1 className="b">Kellz.fun</h1>
+                {/* button for links */}
+                <InfiniteCarousel items={logos} width="100px" height="100px" />
                 <ul className="max-w-md space-y-1 text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
                     <li className="mb-2 ">
-                        Inspired by Neal.Fun
-                        <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
+                        Explore a variety of fun and interactive web games,
+                        inspired by NEAL.FUN, featuring the things I enjoy and
+                        love.
+                    </li>
+                    <li className="mb-2 ">
+                        <a
+                            className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold"
+                            href="https://neal.fun/">
                             https://neal.fun/
-                        </code>
+                        </a>
                     </li>
                 </ul>
-
-                {/* button for links */}
-                <InfiniteCarousel items={logos} />
             </main>
-
             <footer className="flex row-start-3 gap-6 flex-wrap items-center justify-center">
-                <h3>I'm Kelly</h3>
+                <h3>I'm Kelly. </h3>
                 <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
                     <a
                         className="flex items-center gap-2 hover:underline hover:underline-offset-4"

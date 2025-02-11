@@ -1,65 +1,77 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
-// Bite a Byte - Infinite horizontal scroller
+// Updated interface with mandatory 'url' and optional 'className'
+interface CarouselItem {
+    src: string | StaticImageData;
+    url: string; // 'url' is now mandatory
+    alt: string;
+    className?: string; // Optional className for custom styles (like "coming-soon")
+}
 
-const InfiniteCarousel = ({
+interface InfiniteCarouselProps {
+    items: CarouselItem[];
+    width: string;
+    height: string;
+    quantity?: number;
+}
+
+const InfiniteCarousel: React.FC<InfiniteCarouselProps> = ({
     items,
-}: {
-    items: { src: StaticImageData; url: string }[];
+    width,
+    height,
+    quantity,
 }) => {
-    const scrollerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        // Value of scroll ref
-        const scroller = scrollerRef.current;
-
-        function sliderAnimation() {
-            // If scroller has loaded on the DOM
-            if (!scroller) return;
-
-            const innerScroller = scroller.querySelector(".scroll__inner");
-
-            // If scroll__inner has loaded on the DOM
-            if (!innerScroller) return;
-
-            if (innerScroller.getAttribute("data-cloned") === "true") return;
-
-            const innerScrollerChildren = Array.from(innerScroller.children);
-
-            // To imitate the infinite loop, recreate element using cloneNode
-            innerScrollerChildren.forEach((item) => {
-                // Clone each element
-                const extendedLogos = item.cloneNode(true) as HTMLElement;
-
-                // Append cloned elements to innerScroller element
-                innerScroller.appendChild(extendedLogos);
-            });
-
-            // If the innerScroller has an attribute, don't re-clone
-            innerScroller.setAttribute("data-cloned", "true");
-        }
-
-        sliderAnimation();
-    }, []);
+    const safeWidth = width ?? "100px"; // Default to "100px" if undefined
+    const safeHeight = height ?? "100px";
 
     return (
-        <div ref={scrollerRef} className="scroller max-w-[100px] ">
-            <div className="scroll__inner flex gap-2 bg-gray-300 py-4 animate-infinite_scroll">
-                {items.map((item, index) => {
-                    return (
-                        <Link key={index} href={item.url} className="p-1">
+        <div
+            className="scroller"
+            style={
+                {
+                    "--width": safeWidth,
+                    "--height": safeHeight,
+                    "--quantity": quantity ?? items.length, // Defaults to items.length
+                } as React.CSSProperties
+            }>
+            <div className="scroll__inner">
+                {items.map((item, index) => (
+                    <div key={index} className="item-container">
+                        {/* Conditionally render Link and disable if 'coming-soon' class is present */}
+                        <Link
+                            href={item.url}
+                            className={`item ${item.className}`} // Conditionally add className
+                            style={
+                                {
+                                    "--position": index + 1,
+                                } as React.CSSProperties
+                            }
+                            onClick={(e) => {
+                                // Prevent navigation if 'coming-soon' class is present
+                                if (item.className === "coming-soon") {
+                                    e.preventDefault();
+                                }
+                            }}>
                             <Image
                                 src={item.src}
-                                alt={`logo ${index + 1} `}
-                                width={100}
-                                height={100}
+                                alt={item.alt}
+                                width={parseInt(safeWidth)} // Safely parse the width
+                                height={parseInt(safeHeight)}
+                                className={item.className}
                             />
+
+                            {/* Add the 'Coming Soon' label if className="coming-soon" */}
+                            {item.className === "coming-soon" && (
+                                <div className="coming-soon-label">
+                                    Coming Soon
+                                </div>
+                            )}
                         </Link>
-                    );
-                })}
+                    </div>
+                ))}
             </div>
         </div>
     );

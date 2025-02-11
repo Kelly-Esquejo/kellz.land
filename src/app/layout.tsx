@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "kellz.cheese",
-    description: "Random",
+    title: "kellz.land",
+    description:
+        "Explore a variety of fun and interactive web games, inspired by Neal.Fun, featuring the things I enjoy and love.",
 };
 
 export default function RootLayout({

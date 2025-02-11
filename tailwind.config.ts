@@ -1,3 +1,4 @@
+import { transform } from "next/dist/build/swc/generated-native";
 import type { Config } from "tailwindcss";
 
 export default {
