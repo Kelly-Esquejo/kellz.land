@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    output: "export",
-    basePath: "/kellz.land", // replace with your repo name
-    assetPrefix: "/kellz.land/", // replace with your repo name
+    // Comment the followig 3 lines of code to run website locally
+    // output: "export",
+    // basePath: "/kellz.land",
+    // assetPrefix: "/kellz.land/",
 };
 
 export default nextConfig;
