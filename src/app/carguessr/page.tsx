@@ -25,11 +25,7 @@ import Input from "@/component/Input";
                     Scatpack.2022.jpeg
 */
 
-const carImages = [
-    "/toyota-86-2016.png",
-    "/shelby427Cobra-1966.png",
-    "/HONDA-CIVIC-TYPE-R-CAR.png",
-];
+const carImages = ["/toyota.png", "/shelby.png", "/honda.png"];
 
 const CarGuessr: React.FC = () => {
     const [make, setMake] = useState<string>("");
@@ -72,6 +68,7 @@ const CarGuessr: React.FC = () => {
             {/* Processed Image with Hidden Logos */}
             <div className="relative overflow-hidden flex justify-center items-center">
                 <Image
+                    unoptimized
                     className="w-[75vw] max-w-[900px] h-[75vh] object-contain"
                     src={carImage}
                     alt="Car"

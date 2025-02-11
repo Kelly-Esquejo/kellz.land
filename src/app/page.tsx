@@ -5,31 +5,31 @@ import InfiniteCarousel from "@/component/InfiniteCarousel";
 
 const logos = [
     {
-        src: "/logo-car-guessr.png",
+        src: "/carguessr.png",
         url: "/carguessr",
         alt: "Car logo",
         className: "coming-soon",
     },
     {
-        src: "/logo-joke.png",
+        src: "/joke.png",
         url: "/joke",
         alt: "Joke",
         className: "coming-soon",
     },
     {
-        src: "/logo-guesslogo.png",
+        src: "/guess.png",
         url: "/guessthelogo",
         alt: "Guess Logo",
         className: "coming-soon",
     },
     {
-        src: "/logo-food-guessr.png",
+        src: "/foodguessr.png",
         url: "/foodle",
         alt: "Food Guessr Logo",
         className: "coming-soon",
     },
     {
-        src: "/logo-reaction.png",
+        src: "/reaction.png",
         url: "/reactiontraining",
         alt: "Reaction Training Logo",
         className: "coming-soon",
@@ -69,6 +69,7 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer">
                         <Image
+                            unoptimized
                             src="/window.svg"
                             alt="Window icon"
                             width={16}
@@ -82,6 +83,7 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer">
                         <Image
+                            unoptimized
                             src="/globe.svg"
                             alt="Globe icon"
                             width={16}
