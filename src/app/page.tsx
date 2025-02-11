@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import Image from "next/image";
-import Link from "next/link";
 import InfiniteCarousel from "@/component/InfiniteCarousel";
 
 const logos = [
@@ -60,7 +61,7 @@ export default function Home() {
                 </ul>
             </main>
             <footer className="flex row-start-3 gap-6 flex-wrap items-center justify-center">
-                <h3>I'm Kelly. </h3>
+                <h3>I&apos;m Kelly. </h3>
                 <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
                     <a
                         className="flex items-center gap-2 hover:underline hover:underline-offset-4"

@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 "use client";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import Input from "@/component/Input";
 // import ZoomableImage from "@/component/ZoomableImage";
@@ -114,7 +116,9 @@ const CarGuessr: React.FC = () => {
                     />
                 </form>
                 <footer className="flex flex-wrap gap-4 justify-center w-full">
-                    <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
+                    <button
+                        onClick={getRandomCar}
+                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
                         Submit
                     </button>
                     <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">

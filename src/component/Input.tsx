@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { ChangeEvent, FC } from "react";
 
 interface InputProps {
