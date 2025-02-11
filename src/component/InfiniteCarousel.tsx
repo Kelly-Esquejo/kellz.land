@@ -1,11 +1,11 @@
 "use client";
 
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 // Updated interface with mandatory 'url' and optional 'className'
 interface CarouselItem {
-    src: string | StaticImageData;
+    src: string;
     url: string; // 'url' is now mandatory
     alt: string;
     className?: string; // Optional className for custom styles (like "coming-soon")
