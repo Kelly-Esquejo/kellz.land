@@ -68,8 +68,7 @@ export default function Home() {
                         href="https://www.linkedin.com/in/kelly-esquejo/"
                         target="_blank"
                         rel="noopener noreferrer">
-                        <Image
-                            unoptimized
+                        <img
                             src="/window.svg"
                             alt="Window icon"
                             width={16}
@@ -82,8 +81,7 @@ export default function Home() {
                         href="https://github.com/Kelly-Esquejo/kellz.fun"
                         target="_blank"
                         rel="noopener noreferrer">
-                        <Image
-                            unoptimized
+                        <img
                             src="/globe.svg"
                             alt="Globe icon"
                             width={16}
