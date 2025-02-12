@@ -44,7 +44,7 @@ export default function Home() {
                 <InfiniteCarousel items={logos} width="100px" height="100px" />
                 <ul className="max-w-md space-y-1 text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
                     <li className="mb-2 ">
-                        Explore a variety of fun and interactive web games,
+                        Explore a variety of fun and interactive web activities,
                         inspired by NEAL.FUN, featuring the things I enjoy and
                         love.
                     </li>
