@@ -80,8 +80,8 @@ jobs:
               with:
                   path: ./out
 
-    # Deploys when developer pushes changes to repo
     # Deployment job
+    # Deploys when developer pushes changes to repo
     deploy:
         environment:
             name: github-pages

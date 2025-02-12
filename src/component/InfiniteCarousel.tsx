@@ -55,7 +55,8 @@ const InfiniteCarousel: React.FC<InfiniteCarouselProps> = ({
                                     e.preventDefault();
                                 }
                             }}>
-                            <img
+                            <Image
+                                unoptimized
                                 src={item.src}
                                 alt={item.alt}
                                 width={parseInt(safeWidth)} // Safely parse the width
