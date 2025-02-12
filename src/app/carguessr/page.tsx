@@ -71,11 +71,11 @@ const CarGuessr: React.FC = () => {
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Car Guessr
             </h1>
-            {/* Processed Image with Hidden Logos */}
+
             <div className="relative overflow-hidden flex justify-center items-center">
                 <Image
                     unoptimized
-                    className="w-[75vw] max-w-[900px] h-[75vh] object-contain"
+                    // className="w-[75vw] max-w-[900px] h-[75vh] object-contain"
                     src={carImage}
                     alt="Car"
                     width={900}

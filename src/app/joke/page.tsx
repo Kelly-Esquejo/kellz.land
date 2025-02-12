@@ -16,19 +16,19 @@ interface TwoPartJoke {
 const jokeBgImgs = [
     {
         src: "/background/joke/1.jpg",
-        alt: "Car logo",
+        alt: "Joke background 1",
     },
     {
         src: "/background/joke/2.jpg",
-        alt: "Joke",
+        alt: "Joke background 2",
     },
     {
         src: "/background/joke/3.jpg",
-        alt: "Guess Logo",
+        alt: "Joke background 3",
     },
     {
         src: "/background/joke/4.jpg",
-        alt: "Food Guessr Logo",
+        alt: "Joke background 4",
     },
 ];
 
@@ -74,7 +74,6 @@ const JokeGenerator: React.FC = () => {
                     src={bgImg.src}
                     alt={bgImg.alt}
                     fill
-                    objectFit="cover"
                     className="absolute top-0 left-0 z-[-1]"
                     priority
                 />
