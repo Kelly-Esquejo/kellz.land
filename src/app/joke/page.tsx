@@ -37,18 +37,44 @@ type Joke = SingleJoke | TwoPartJoke;
 const JokeGenerator: React.FC = () => {
     const [joke, setJoke] = useState<Joke | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [filters, setFilters] = useState({
+        nsfw: false,
+        religious: false,
+        political: false,
+        racist: false,
+        sexist: false,
+        explicit: false,
+    });
 
     const [bgImg, setBgImg] = useState(jokeBgImgs[0]);
     const getRandomBgImg = () => {
         setBgImg(jokeBgImgs[Math.floor(Math.random() * jokeBgImgs.length)]);
     };
+
+    const toggleFilter = (filter: keyof typeof filters) => {
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            [filter]: !prevFilters[filter],
+        }));
+    };
+
     const fetchJoke = async () => {
         setIsLoading(true);
         getRandomBgImg(); // Change the background image on each click
+
+        const activeFilters = Object.keys(filters).filter(
+            (key) => filters[key as keyof typeof filters]
+        );
+        const apiUrl =
+            activeFilters.length === 0
+                ? "https://v2.jokeapi.dev/joke/Any"
+                : `https://v2.jokeapi.dev/joke/Any?blacklistFlags=${activeFilters.join(
+                      ","
+                  )}`;
+
+        console.log("API URL:", apiUrl); // Log the API URL to the console
         try {
-            //https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit
-            //https://v2.jokeapi.dev/joke/Any
-            const response = await fetch("https://v2.jokeapi.dev/joke/Any");
+            const response = await fetch(apiUrl);
             const data: Joke = await response.json();
             setJoke(data);
         } catch (error) {
@@ -81,7 +107,7 @@ const JokeGenerator: React.FC = () => {
                 {/* Glass morphism container */}
                 {/* className=" border-solid border-[2px] border-[#b2a293] p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 " */}
                 <div className="h-[400px] w-[400px] flex flex-col justify-between items-centerrelative">
-                    <div className="min-h-[80px] min-w-[80px] text-center text-4xl text-purple-900 pt-12">
+                    <div className="min-h-[80px] min-w-[80px] text-center text-3xl text-purple-900 pt-12">
                         {isLoading ? (
                             <div>Loading...</div>
                         ) : joke ? (
@@ -95,11 +121,31 @@ const JokeGenerator: React.FC = () => {
                             )
                         ) : null}
                     </div>
+
+                    {/* Fetches a random joke */}
                     <button
                         onClick={fetchJoke}
                         className="font-bold relative rounded border-2 border-black bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
                         Click Me!
                     </button>
+
+                    {/* User can toggle which flags to blacklist*/}
+                    <div className="flex flex-row">
+                        {Object.keys(filters).map((key) => (
+                            <button
+                                key={key}
+                                onClick={() =>
+                                    toggleFilter(key as keyof typeof filters)
+                                }
+                                className={`font-bold relative rounded border-2 border-black py-1 transition duration-100 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 ${
+                                    filters[key as keyof typeof filters]
+                                        ? "bg-yellow-400 text-gray-900"
+                                        : "bg-gray-200 text-black"
+                                }`}>
+                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
