@@ -15,19 +15,19 @@ interface TwoPartJoke {
 
 const jokeBgImgs = [
     {
-        src: "/background/joke/1.jpg",
+        src: "jokebg1.jpg",
         alt: "Joke background 1",
     },
     {
-        src: "/background/joke/2.jpg",
+        src: "jokebg2.jpg",
         alt: "Joke background 2",
     },
     {
-        src: "/background/joke/3.jpg",
+        src: "jokebg3.jpg",
         alt: "Joke background 3",
     },
     {
-        src: "/background/joke/4.jpg",
+        src: "jokebg4.jpg",
         alt: "Joke background 4",
     },
 ];
