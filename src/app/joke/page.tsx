@@ -37,7 +37,7 @@ type Joke = SingleJoke | TwoPartJoke;
 const JokeGenerator: React.FC = () => {
     const [joke, setJoke] = useState<Joke | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [filters, setFilters] = useState({
+    const [flags, setFlags] = useState({
         nsfw: false,
         religious: false,
         political: false,
@@ -51,10 +51,10 @@ const JokeGenerator: React.FC = () => {
         setBgImg(jokeBgImgs[Math.floor(Math.random() * jokeBgImgs.length)]);
     };
 
-    const toggleFilter = (filter: keyof typeof filters) => {
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            [filter]: !prevFilters[filter],
+    const toggleFlag = (flag: keyof typeof flags) => {
+        setFlags((prevFlags) => ({
+            ...prevFlags,
+            [flag]: !prevFlags[flag],
         }));
     };
 
@@ -62,15 +62,30 @@ const JokeGenerator: React.FC = () => {
         setIsLoading(true);
         getRandomBgImg(); // Change the background image on each click
 
-        const activeFilters = Object.keys(filters).filter(
-            (key) => filters[key as keyof typeof filters]
+        const activeFlags = Object.keys(flags).filter(
+            (key) => flags[key as keyof typeof flags]
         );
-        const apiUrl =
-            activeFilters.length === 0
-                ? "https://v2.jokeapi.dev/joke/Any"
-                : `https://v2.jokeapi.dev/joke/Any?blacklistFlags=${activeFilters.join(
-                      ","
-                  )}`;
+
+        let apiUrl =
+            "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
+
+        // Extract the blacklist part of the URL
+        //  // Get everything after 'blacklistFlags='
+        let blacklistFlags = apiUrl.split("=")[1];
+
+        // Remove active filters
+        activeFlags.forEach((flag) => {
+            blacklistFlags = blacklistFlags
+                .replace(flag, "")
+                .replace(",,", ","); // Remove filter and fix double commas
+        });
+        // Clean up leading/trailing commas
+        blacklistFlags = blacklistFlags.replace(/^,|,$/g, "");
+
+        // Reconstruct API URL
+        apiUrl = blacklistFlags
+            ? `https://v2.jokeapi.dev/joke/Any?blacklistFlags=${blacklistFlags}`
+            : "https://v2.jokeapi.dev/joke/Any";
 
         console.log("API URL:", apiUrl); // Log the API URL to the console
         try {
@@ -130,15 +145,15 @@ const JokeGenerator: React.FC = () => {
                     </button>
 
                     {/* User can toggle which flags to blacklist*/}
-                    <div className="flex flex-row">
-                        {Object.keys(filters).map((key) => (
+                    <div className="flex flex-row flex-wrap">
+                        {Object.keys(flags).map((key) => (
                             <button
                                 key={key}
                                 onClick={() =>
-                                    toggleFilter(key as keyof typeof filters)
+                                    toggleFlag(key as keyof typeof flags)
                                 }
                                 className={`font-bold relative rounded border-2 border-black py-1 transition duration-100 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 ${
-                                    filters[key as keyof typeof filters]
+                                    flags[key as keyof typeof flags]
                                         ? "bg-yellow-400 text-gray-900"
                                         : "bg-gray-200 text-black"
                                 }`}>
