@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap"); */
+@font-face {
+    font-family: "Bangers";
+    src: url("/Bangers.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --background: #ffffff;
     --foreground: #171717;
 }
-
+.bangers {
+    font-family: "Bangers", cursive;
+}
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #18405a;

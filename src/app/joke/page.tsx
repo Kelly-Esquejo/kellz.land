@@ -100,7 +100,7 @@ const JokeGenerator: React.FC = () => {
     };
 
     return (
-        <div className="h-screen w-screen flex justify-center items-center font-[family-name:var(--font-geist-sans)] ">
+        <div className="h-screen w-screen flex justify-center items-center">
             {/* Following does not work when deployed
             Solution: Have background position underneath content */}
             {/* style={{
@@ -108,23 +108,23 @@ const JokeGenerator: React.FC = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }} */}
-            <div className="relative h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+            <div className="relative h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 comic">
                 {/* Background Image */}
                 <Image
                     unoptimized
                     src={bgImg.src}
                     alt={bgImg.alt}
                     fill
-                    className="absolute top-0 left-0 z-[-1]"
+                    className="absolute top-0 left-0 z-[-1] object-cover w-full h-full md:h-auto md:w-auto"
                     priority
                 />
 
                 {/* Glass morphism container */}
                 {/* className=" border-solid border-[2px] border-[#b2a293] p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 " */}
                 <div className="h-[400px] w-[400px] flex flex-col justify-between items-centerrelative">
-                    <div className="min-h-[80px] min-w-[80px] text-center text-3xl text-purple-900 pt-12">
+                    <div className="min-h-[80px] min-w-[80px] text-center text-3xl text-purple-900 pt-12 bangers drop-shadow-lg">
                         {isLoading ? (
-                            <div>Loading...</div>
+                            <div className="comic">Loading...</div>
                         ) : joke ? (
                             joke.type === "twopart" ? (
                                 <>
@@ -140,7 +140,7 @@ const JokeGenerator: React.FC = () => {
                     {/* Fetches a random joke */}
                     <button
                         onClick={fetchJoke}
-                        className="font-bold relative rounded border-2 border-black bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
+                        className="font-bold bangers relative rounded border-2 border-black bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
                         Click Me!
                     </button>
 
@@ -152,7 +152,7 @@ const JokeGenerator: React.FC = () => {
                                 onClick={() =>
                                     toggleFlag(key as keyof typeof flags)
                                 }
-                                className={`font-bold relative rounded border-2 border-black py-1 transition duration-100 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 ${
+                                className={`font-bold bangers relative rounded border-2 border-black py-1 transition duration-100 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 ${
                                     flags[key as keyof typeof flags]
                                         ? "bg-yellow-400 text-gray-900"
                                         : "bg-gray-200 text-black"
