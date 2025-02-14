@@ -15,7 +15,7 @@
     --foreground: #171717;
 }
 .bangers {
-    font-family: "Bangers", cursive;
+    font-family: "Bangers", var(--font-geist-sans), sans-serif;
 }
 @media (prefers-color-scheme: dark) {
     :root {
