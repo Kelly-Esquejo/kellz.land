@@ -37,6 +37,8 @@ type Joke = SingleJoke | TwoPartJoke;
 const JokeGenerator: React.FC = () => {
     const [joke, setJoke] = useState<Joke | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [intro, setIntro] = useState(true);
+
     const [flags, setFlags] = useState({
         nsfw: false,
         religious: false,
@@ -60,6 +62,7 @@ const JokeGenerator: React.FC = () => {
 
     const fetchJoke = async () => {
         setIsLoading(true);
+        setIntro(false);
         getRandomBgImg(); // Change the background image on each click
 
         const activeFlags = Object.keys(flags).filter(
@@ -100,7 +103,7 @@ const JokeGenerator: React.FC = () => {
     };
 
     return (
-        <div className="h-screen w-screen flex justify-center items-center">
+        <div className="h-screen w-screen justify-center items-center">
             {/* Following does not work when deployed
             Solution: Have background position underneath content */}
             {/* style={{
@@ -108,51 +111,78 @@ const JokeGenerator: React.FC = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }} */}
-            <div className="relative h-screen w-screen flex justify-center items-center p-8 pb-20 sm:p-20 comic">
-                {/* Background Image */}
-                <Image
-                    unoptimized
-                    src={bgImg.src}
-                    alt={bgImg.alt}
-                    fill
-                    className="absolute top-0 left-0 z-[-1] object-cover w-full h-full md:h-auto md:w-auto"
-                    priority
-                />
 
-                {/* Glass morphism container */}
-                {/* className=" border-solid border-[2px] border-[#b2a293] p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 " */}
-                <div className="h-[400px] w-[400px] flex flex-col justify-between items-centerrelative">
-                    <div className="min-h-[80px] min-w-[80px] text-center text-3xl text-purple-900 pt-12 bangers drop-shadow-lg">
-                        {isLoading ? (
-                            <div className="comic">Loading...</div>
-                        ) : joke ? (
-                            joke.type === "twopart" ? (
-                                <>
-                                    <div>{joke.setup}</div>
-                                    <div>{joke.delivery}</div>
-                                </>
-                            ) : (
-                                <div>{joke.joke}</div>
-                            )
-                        ) : null}
+            {/* Background Image */}
+            <Image
+                unoptimized
+                src={bgImg.src}
+                alt={bgImg.alt}
+                fill
+                className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center brightness-75"
+                priority
+            />
+            <div className="relative h-screen w-screen flex flex-col justify-center items-center  sm:p-20">
+                {/* When user presses Click Me! button, introduction will be
+                replaced with the joke */}
+                <div className="grid grid-cols-1 gap-12">
+                    {/* Glass morphism container for introduction to the joke generator */}
+                    <div className="flex justify-center">
+                        {intro ? (
+                            <div className="w-[60%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] flex justify-center items-center border-solid border-[2px] border-[#b2a293] p-6 sm:p-8 md:p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30">
+                                <h3 className="bangers text-center items-center  text-lg sm:text-xl md:text-2xl lg:text-3xl leading-tight">
+                                    Welcome to the Joke Generator! Click the
+                                    button below to get a random joke. You can
+                                    filter jokes based on different categories
+                                    to customize your experience. Enjoy!
+                                </h3>
+                            </div>
+                        ) : (
+                            <div className="w-[40%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px]  text-center text-3xl text-md text-purple-800 pt-12 bangers drop-shadow-lg">
+                                {isLoading ? (
+                                    <div className="bangers">Loading...</div>
+                                ) : joke ? (
+                                    joke.type === "twopart" ? (
+                                        <>
+                                            <div className="pt-12">
+                                                {joke.setup.toUpperCase()}
+                                            </div>
+                                            <div className="pt-12">
+                                                {joke.delivery.toUpperCase()}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div className="pt-12">
+                                            {joke.joke.toUpperCase()}
+                                        </div>
+                                    )
+                                ) : null}
+                            </div>
+                        )}
                     </div>
+                    <div className="flex justify-center">
+                        {/* Fetches a random joke */}
+                        <button
+                            onClick={fetchJoke}
+                            className="font-bold bangers relative rounded border-2 border-black bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px]">
+                            Click Me!
+                        </button>
+                    </div>
+                </div>
 
-                    {/* Fetches a random joke */}
-                    <button
-                        onClick={fetchJoke}
-                        className="font-bold bangers relative rounded border-2 border-black bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5">
-                        Click Me!
-                    </button>
-
-                    {/* User can toggle which flags to blacklist*/}
-                    <div className="flex flex-row flex-wrap">
+                {/* User can toggle which flags to blacklist*/}
+                <footer className="flex flex-col items-center ">
+                    <h3 className="text-black bangers text-wrap text-center">
+                        NOTE: The jokes can be filtered through the following
+                        buttons.
+                    </h3>
+                    <div className="flex flex-row flex-wrap items-end">
                         {Object.keys(flags).map((key) => (
                             <button
                                 key={key}
                                 onClick={() =>
                                     toggleFlag(key as keyof typeof flags)
                                 }
-                                className={`font-bold bangers relative rounded border-2 border-black py-1 transition duration-100 flex items-center justify-center gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 ${
+                                className={`font-bold bangers relative rounded border-2 border-black py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
                                     flags[key as keyof typeof flags]
                                         ? "bg-yellow-400 text-gray-900"
                                         : "bg-gray-200 text-black"
@@ -161,7 +191,7 @@ const JokeGenerator: React.FC = () => {
                             </button>
                         ))}
                     </div>
-                </div>
+                </footer>
             </div>
         </div>
     );
