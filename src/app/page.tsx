@@ -2,6 +2,17 @@
 import Image from "next/image";
 import InfiniteCarousel from "@/component/InfiniteCarousel";
 
+const kellzLandArt = () => {
+    return ` █████               ████  ████                ████                           █████
+░░███               ░░███ ░░███               ░░███                          ░░███ 
+ ░███ █████  ██████  ░███  ░███   █████████    ░███   ██████   ████████    ███████ 
+ ░███░░███  ███░░███ ░███  ░███  ░█░░░░███     ░███  ░░░░░███ ░░███░░███  ███░░███ 
+ ░██████░  ░███████  ░███  ░███  ░   ███░      ░███   ███████  ░███ ░███ ░███ ░███ 
+ ░███░░███ ░███░░░   ░███  ░███    ███░   █    ░███  ███░░███  ░███ ░███ ░███ ░███ 
+ ████ █████░░██████  █████ █████  █████████ ██ █████░░████████ ████ █████░░████████
+░░░░ ░░░░░  ░░░░░░  ░░░░░ ░░░░░  ░░░░░░░░░ ░░ ░░░░░  ░░░░░░░░ ░░░░ ░░░░░  ░░░░░░░░ `;
+};
+
 const logos = [
     {
         src: "carguessr.png",
@@ -38,8 +49,9 @@ export default function Home() {
     return (
         <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-mono)]">
             <header>
-                <h1 className="">kellz.land</h1>
+                <pre className="text-[6px] ">{kellzLandArt()}</pre>
             </header>
+            {/* <header>kellz.land</header> */}
             <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
                 {/* button for links */}
                 <InfiniteCarousel items={logos} width="100px" height="100px" />
