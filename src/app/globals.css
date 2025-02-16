@@ -5,7 +5,7 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap"); */
 @font-face {
     font-family: "Bangers";
-    src: url(/public/bangers.ttf) format("truetype");
+    src: url("/public/bangers.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
 }
