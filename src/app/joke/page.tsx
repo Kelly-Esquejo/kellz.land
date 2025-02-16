@@ -137,7 +137,7 @@ const JokeGenerator: React.FC = () => {
                                 </h3>
                             </div>
                         ) : (
-                            <div className="w-[600px] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px]  tracking-wider text-center text-3xl text-md text-gray-200 pt-12 bangers drop-shadow-lg border ">
+                            <div className="w-[600px] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px]  tracking-wider text-center text-3xl text-md text-gray-200 pt-12 bangers drop-shadow-lg ">
                                 {isLoading ? (
                                     <div className="bangers">Loading...</div>
                                 ) : joke ? (

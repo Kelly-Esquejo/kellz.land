@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import Input from "@/component/Input";
 // import ZoomableImage from "@/component/ZoomableImage";
@@ -60,6 +60,19 @@ const CarGuessr: React.FC = () => {
         setError(null); // Clear error if inputs are valid
     };
 
+    //----------------------------
+    const [authUrl, setAuthUrl] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Fetch the authorization URL from your /api/auth route
+        fetch("/api/auth")
+            .then((response) => response.json())
+            .then((data) => setAuthUrl(data.url))
+            .catch((error) => console.error("Error fetching auth URL:", error));
+    }, []);
+
+    if (!authUrl) return <div>Loading...</div>;
+
     return (
         <div
             className="flex flex-col items-center justify-center h-screen w-full gap-4 pt-4 pb-4"
@@ -71,7 +84,20 @@ const CarGuessr: React.FC = () => {
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Car Guessr
             </h1>
-
+            <div>
+                <a href={authUrl} target="_blank" rel="noopener noreferrer">
+                    <button
+                        style={{
+                            padding: "10px 20px",
+                            backgroundColor: "#4285F4",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "5px",
+                        }}>
+                        Authenticate with Google
+                    </button>
+                </a>
+            </div>
             <div className="relative overflow-hidden flex justify-center items-center">
                 <Image
                     unoptimized
