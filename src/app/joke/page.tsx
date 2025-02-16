@@ -137,7 +137,7 @@ const JokeGenerator: React.FC = () => {
                                 </h3>
                             </div>
                         ) : (
-                            <div className="w-[40%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px]  text-center text-3xl text-md text-purple-800 pt-12 bangers drop-shadow-lg">
+                            <div className="w-[600px] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px]  tracking-wider text-center text-3xl text-md text-gray-200 pt-12 bangers drop-shadow-lg border ">
                                 {isLoading ? (
                                     <div className="bangers">Loading...</div>
                                 ) : joke ? (
@@ -146,12 +146,12 @@ const JokeGenerator: React.FC = () => {
                                             <div className="pt-12">
                                                 {joke.setup.toUpperCase()}
                                             </div>
-                                            <div className="pt-12">
+                                            <div className="pt-12 text-5xl hide-punchline">
                                                 {joke.delivery.toUpperCase()}
                                             </div>
                                         </>
                                     ) : (
-                                        <div className="pt-12">
+                                        <div className="pt-12 text-4xl">
                                             {joke.joke.toUpperCase()}
                                         </div>
                                     )
@@ -170,8 +170,8 @@ const JokeGenerator: React.FC = () => {
                 </div>
 
                 {/* User can toggle which flags to blacklist*/}
-                <footer className="flex flex-col items-center ">
-                    <h3 className="text-black bangers text-wrap text-center">
+                <footer className="flex flex-col items-center pt-4">
+                    <h3 className="text-gray-200 bangers text-wrap text-center text-[1.5rem]">
                         NOTE: The jokes can be filtered through the following
                         buttons.
                     </h3>
@@ -182,7 +182,7 @@ const JokeGenerator: React.FC = () => {
                                 onClick={() =>
                                     toggleFlag(key as keyof typeof flags)
                                 }
-                                className={`font-bold bangers relative rounded border-2 border-black py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
+                                className={`font-bold bangers relative rounded border-2 border-black  hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
                                     flags[key as keyof typeof flags]
                                         ? "bg-yellow-400 text-gray-900"
                                         : "bg-gray-200 text-black"
