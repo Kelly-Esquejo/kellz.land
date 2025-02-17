@@ -113,14 +113,14 @@ const JokeGenerator: React.FC = () => {
             }} */}
 
             {/* Background Image */}
-            <Image
+            {/* <Image
                 unoptimized
                 src={bgImg.src}
                 alt={bgImg.alt}
                 fill
                 className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center brightness-75"
                 priority
-            />
+            /> */}
             <div className="relative h-screen w-screen flex flex-col justify-center items-center  sm:p-20">
                 {/* When user presses Click Me! button, introduction will be
                 replaced with the joke */}
