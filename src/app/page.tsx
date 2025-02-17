@@ -52,10 +52,10 @@ export default function Home() {
                 <pre className="text-[6px] ">{kellzLandArt()}</pre>
             </header>
             {/* <header>kellz.land</header> */}
-            <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+            <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start max-w-xs sm:max-w-md lg:max-w-lg ">
                 {/* button for links */}
                 <InfiniteCarousel items={logos} width="100px" height="100px" />
-                <ul className="max-w-md space-y-1 text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+                <ul className="max-w-md space-y-1 text-sm text-center font-[family-name:var(--font-geist-mono)]">
                     <li className="mb-2 ">
                         Explore a variety of fun and interactive web activities,
                         inspired by NEAL.FUN, featuring the things I enjoy and

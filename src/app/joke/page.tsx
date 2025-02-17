@@ -175,7 +175,7 @@ const JokeGenerator: React.FC = () => {
                         NOTE: The jokes can be filtered through the following
                         buttons.
                     </h3>
-                    <div className="flex flex-row flex-wrap items-end">
+                    <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:flex-wrap items-center justify-center">
                         {Object.keys(flags).map((key) => (
                             <button
                                 key={key}
