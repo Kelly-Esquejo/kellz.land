@@ -4,6 +4,28 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
+const kellzLandArt = () => {
+    return ` █████               ████  ████                ████                           █████
+░░███               ░░███ ░░███               ░░███                          ░░███ 
+ ░███ █████  ██████  ░███  ░███   █████████    ░███   ██████   ████████    ███████ 
+ ░███░░███  ███░░███ ░███  ░███  ░█░░░░███     ░███  ░░░░░███ ░░███░░███  ███░░███ 
+ ░██████░  ░███████  ░███  ░███  ░   ███░      ░███   ███████  ░███ ░███ ░███ ░███ 
+ ░███░░███ ░███░░░   ░███  ░███    ███░   █    ░███  ███░░███  ░███ ░███ ░███ ░███ 
+ ████ █████░░██████  █████ █████  █████████ ██ █████░░████████ ████ █████░░████████
+░░░░ ░░░░░  ░░░░░░  ░░░░░ ░░░░░  ░░░░░░░░░ ░░ ░░░░░  ░░░░░░░░ ░░░░ ░░░░░  ░░░░░░░░ `;
+};
+
+const jokeTitleArt = () => {
+    return ` ███████████ █████                        █████          █████                    █████████                                                    █████                      
+░█░░░███░░░█░░███                        ░░███          ░░███                    ███░░░░░███                                                  ░░███                       
+░   ░███  ░  ░███████    ██████           ░███   ██████  ░███ █████  ██████     ███     ░░░   ██████  ████████    ██████  ████████   ██████   ███████    ██████  ████████ 
+    ░███     ░███░░███  ███░░███          ░███  ███░░███ ░███░░███  ███░░███   ░███          ███░░███░░███░░███  ███░░███░░███░░███ ░░░░░███ ░░░███░    ███░░███░░███░░███
+    ░███     ░███ ░███ ░███████           ░███ ░███ ░███ ░██████░  ░███████    ░███    █████░███████  ░███ ░███ ░███████  ░███ ░░░   ███████   ░███    ░███ ░███ ░███ ░░░ 
+    ░███     ░███ ░███ ░███░░░      ███   ░███ ░███ ░███ ░███░░███ ░███░░░     ░░███  ░░███ ░███░░░   ░███ ░███ ░███░░░   ░███      ███░░███   ░███ ███░███ ░███ ░███     
+    █████    ████ █████░░██████    ░░████████  ░░██████  ████ █████░░██████     ░░█████████ ░░██████  ████ █████░░██████  █████    ░░████████  ░░█████ ░░██████  █████    
+   ░░░░░    ░░░░ ░░░░░  ░░░░░░      ░░░░░░░░    ░░░░░░  ░░░░ ░░░░░  ░░░░░░       ░░░░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░░  ░░░░░      ░░░░░░░░    ░░░░░   ░░░░░░  ░░░░░     `;
+};
+
 interface SingleJoke {
     type: "single";
     joke: string;
@@ -40,6 +62,7 @@ const JokeGenerator: React.FC = () => {
     const [joke, setJoke] = useState<Joke | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [intro, setIntro] = useState(true);
+    const [safeMode, setSafeMode] = useState(true);
 
     const [flags, setFlags] = useState({
         nsfw: false,
@@ -49,6 +72,8 @@ const JokeGenerator: React.FC = () => {
         sexist: false,
         explicit: false,
     });
+
+    const toggleSafeMode = () => setSafeMode(!safeMode);
 
     const [bgImg, setBgImg] = useState(jokeBgImgs[0]);
     const getRandomBgImg = () => {
@@ -65,7 +90,7 @@ const JokeGenerator: React.FC = () => {
     const fetchJoke = async () => {
         setIsLoading(true);
         setIntro(false);
-        getRandomBgImg(); // Change the background image on each click
+        //     getRandomBgImg(); // Change the background image on each click
 
         const activeFlags = Object.keys(flags).filter(
             (key) => flags[key as keyof typeof flags]
@@ -84,6 +109,7 @@ const JokeGenerator: React.FC = () => {
                 .replace(flag, "")
                 .replace(",,", ","); // Remove filter and fix double commas
         });
+
         // Clean up leading/trailing commas
         blacklistFlags = blacklistFlags.replace(/^,|,$/g, "");
 
@@ -92,7 +118,13 @@ const JokeGenerator: React.FC = () => {
             ? `https://v2.jokeapi.dev/joke/Any?blacklistFlags=${blacklistFlags}`
             : "https://v2.jokeapi.dev/joke/Any";
 
-        console.log("API URL:", apiUrl); // Log the API URL to the console
+        // Check if safeMode is true and change apiUrl
+        if (safeMode) {
+            apiUrl = `https://v2.jokeapi.dev/joke/Any?safe-mode`;
+        }
+
+        // Testing purposes: Log the API URL to the console
+        //console.log("API URL:", apiUrl);
         try {
             const response = await fetch(apiUrl);
             const data: Joke = await response.json();
@@ -113,7 +145,6 @@ const JokeGenerator: React.FC = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }} */}
-
             {/* Background Image */}
             {/* <Image
                 unoptimized
@@ -123,20 +154,38 @@ const JokeGenerator: React.FC = () => {
                 className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center brightness-75"
                 priority
             /> */}
+
             <div className="relative h-screen w-screen flex flex-col justify-center items-center  sm:p-20">
-                {/* When user presses Click Me! button, introduction will be
+                <header className="gap-12">
+                    <pre className="text-[2px] text-center text-purple-300">
+                        {kellzLandArt()}
+                    </pre>
+                    <pre className="text-[3px] pt-2 text-purple-500">
+                        {" "}
+                        {jokeTitleArt()}
+                    </pre>
+                </header>
+                {/* When user presses Click Me! button, introduction will be 
                 replaced with the joke */}
-                <div className="grid grid-cols-1 gap-12">
+                <div className="grid grid-cols-1 pt-4 pb-4">
                     {/* Glass morphism container for introduction to the joke generator */}
                     <div className="flex justify-center">
                         {intro ? (
-                            <div className="w-[60%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] flex justify-center items-center border-solid border-[2px] border-[#b2a293] p-6 sm:p-8 md:p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30">
-                                <h3 className="bangers text-center items-center  text-lg sm:text-xl md:text-2xl lg:text-3xl leading-tight">
+                            <div className="w-[60%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] flex flex-col justify-center items-center border-solid border-[2px] border-[#b2a293] p-6 sm:p-8 md:p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 font-[family-name:var(--font-geist-mono)] space-y-4">
+                                <h3 className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl leading-tight text-white">
                                     Welcome to the Joke Generator! Click the
                                     button below to get a random joke. You can
                                     filter jokes based on different categories
                                     to customize your experience. Enjoy!
                                 </h3>
+                                <div className="text-center space-y-2">
+                                    <h4 className="text-xl font-semibold text-red-700">
+                                        Disclaimer:
+                                    </h4>
+                                    <span className="text-white text-sm uppercase">
+                                        All jokes are not written by Kellz.Land
+                                    </span>
+                                </div>
                             </div>
                         ) : (
                             <div className="w-[600px] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px]  tracking-wider text-center text-3xl text-md text-gray-200 pt-12 bangers drop-shadow-lg ">
@@ -161,39 +210,62 @@ const JokeGenerator: React.FC = () => {
                             </div>
                         )}
                     </div>
-                    <div className="flex justify-center">
+                    <div className="flex justify-center pt-4">
                         {/* Fetches a random joke */}
                         <button
                             onClick={fetchJoke}
                             className="font-bold bangers relative rounded border-2 border-black bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px]">
                             Click Me!
                         </button>
+                        <button
+                            className={`font-bold bangers relative rounded border-2 py-1 text-black transition duration-100 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px] whitespace-nowrap ${
+                                safeMode
+                                    ? "border-red-500 bg-red-300 hover:bg-red-400 hover:text-gray-900"
+                                    : "border-green-500 bg-green-300 hover:bg-green-400 hover:text-gray-900"
+                            }`}
+                            onClick={toggleSafeMode}>
+                            {safeMode
+                                ? "Disable Safe Mode"
+                                : "Enable Safe Mode"}
+                        </button>
                     </div>
                 </div>
 
                 {/* User can toggle which flags to blacklist*/}
-                <footer className="flex flex-col items-center pt-4">
-                    <h3 className="text-gray-200 bangers text-wrap text-center text-[1.5rem]">
-                        NOTE: The jokes can be filtered through the following
-                        buttons.
-                    </h3>
-                    <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:flex-wrap items-center justify-center">
-                        {Object.keys(flags).map((key) => (
-                            <button
-                                key={key}
-                                onClick={() =>
-                                    toggleFlag(key as keyof typeof flags)
-                                }
-                                className={`font-bold bangers relative rounded border-2 border-black  hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
-                                    flags[key as keyof typeof flags]
-                                        ? "bg-yellow-400 text-gray-900"
-                                        : "bg-gray-200 text-black"
-                                }`}>
-                                {key.charAt(0).toUpperCase() + key.slice(1)}
-                            </button>
-                        ))}
-                    </div>
-                </footer>
+                <div>
+                    {/* Safe mode toggle */}
+
+                    {/* Safe Mode content */}
+                    {safeMode ? (
+                        <div></div>
+                    ) : (
+                        <footer className="flex flex-col items-center pt-4">
+                            <h3 className="text-gray-200  text-wrap text-center text-[1.5rem] font-[family-name:var(--font-geist-mono)] ">
+                                NOTE: The jokes can be filtered through the
+                                following buttons.
+                            </h3>
+                            <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:flex-wrap items-center justify-center pt-4">
+                                {Object.keys(flags).map((key) => (
+                                    <button
+                                        key={key}
+                                        onClick={() =>
+                                            toggleFlag(
+                                                key as keyof typeof flags
+                                            )
+                                        }
+                                        className={`font-bold bangers relative rounded border-2 border-black  hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
+                                            flags[key as keyof typeof flags]
+                                                ? "bg-yellow-400 text-gray-900"
+                                                : "bg-gray-200 text-black"
+                                        }`}>
+                                        {key.charAt(0).toUpperCase() +
+                                            key.slice(1)}
+                                    </button>
+                                ))}
+                            </div>
+                        </footer>
+                    )}
+                </div>
             </div>
         </div>
     );
