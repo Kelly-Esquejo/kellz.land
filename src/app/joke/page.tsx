@@ -90,7 +90,7 @@ const JokeGenerator: React.FC = () => {
     const fetchJoke = async () => {
         setIsLoading(true);
         setIntro(false);
-        //     getRandomBgImg(); // Change the background image on each click
+        // getRandomBgImg(); // Change the background image on each click
 
         const activeFlags = Object.keys(flags).filter(
             (key) => flags[key as keyof typeof flags]
@@ -151,7 +151,7 @@ const JokeGenerator: React.FC = () => {
                 src={bgImg.src}
                 alt={bgImg.alt}
                 fill
-                className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center "
+                className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center brightness-50"
                 priority
             />
             <header className="text-center">
