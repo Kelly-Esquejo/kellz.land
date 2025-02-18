@@ -169,7 +169,7 @@ const JokeGenerator: React.FC = () => {
                     {/* Glass morphism container for introduction to the joke generator */}
                     <div className="flex justify-center">
                         {intro ? (
-                            <div className="w-[90%] sm:w-[60%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] flex flex-col justify-center items-center border-solid border-[2px] border-[#b2a293] p-6 sm:p-8 md:p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 font-[family-name:var(--font-geist-mono)] space-y-4">
+                            <div className="w-[90%] sm:w-[60%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] flex flex-col justify-center items-center border-solid rounded-md border-[2px] border-[#b2a293] p-6 sm:p-8 md:p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 font-[family-name:var(--font-geist-mono)] space-y-4">
                                 <h3 className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl leading-tight text-white">
                                     Welcome to the Joke Generator! Click the
                                     button below to get a random joke. You can
