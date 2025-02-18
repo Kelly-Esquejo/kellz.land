@@ -137,7 +137,7 @@ const JokeGenerator: React.FC = () => {
     };
 
     return (
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 gap-16 sm:p-20">
+        <div className="flex flex-col min-h-screen justify-between p-4">
             {/* Following does not work when deployed
             Solution: Have background position underneath content */}
             {/* style={{
@@ -227,9 +227,7 @@ const JokeGenerator: React.FC = () => {
                     </button>
                 </div>
             </main>
-
             {/* Safe mode toggle */}
-
             {safeMode ? (
                 <div></div>
             ) : (
@@ -239,7 +237,7 @@ const JokeGenerator: React.FC = () => {
                         buttons.
                     </h3>
                     {/* User can toggle which flags to blacklist*/}
-                    <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:flex-wrap items-center justify-center pt-4">
+                    <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:flex-wrap items-center justify-center pt-4">
                         {Object.keys(flags).map((key) => (
                             <button
                                 key={key}
