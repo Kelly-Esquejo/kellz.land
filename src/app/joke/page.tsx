@@ -146,14 +146,14 @@ const JokeGenerator: React.FC = () => {
                 backgroundPosition: "center",
             }} */}
             {/* Background Image */}
-            {/* <Image
+            <Image
                 unoptimized
                 src={bgImg.src}
                 alt={bgImg.alt}
                 fill
                 className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center brightness-75"
                 priority
-            /> */}
+            />
             <header className="text-center">
                 <pre className="text-[2px] text-purple-300">
                     {kellzLandArt()}
