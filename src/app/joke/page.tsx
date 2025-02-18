@@ -3,6 +3,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const kellzLandArt = () => {
     return ` █████               ████  ████                ████                           █████
@@ -155,12 +156,19 @@ const JokeGenerator: React.FC = () => {
                 priority
             />
             <header className="text-center">
-                <pre className="text-[2px] text-purple-300">
-                    {kellzLandArt()}
+                <pre className="text-[4px] text-purple-100">
+                    <Link
+                        href="https://kelly-esquejo.github.io/kellz.land/"
+                        className="">
+                        {kellzLandArt()}
+                    </Link>
                 </pre>
-                <pre className="text-[3px] pt-2 text-purple-500">
+                {/* <pre className="text-[4px] pt-2 text-purple-100">
                     {jokeTitleArt()}
-                </pre>
+                </pre> */}
+                <h4 className="text-3xl font-extrabold text-center text-yellow-400 drop-shadow-md md:text-4xl animate-bounce pt-2">
+                    The Joke Generator
+                </h4>
             </header>
             <main className="relative flex flex-col justify-center items-center">
                 {/* When user presses Click Me! button, introduction will be 
