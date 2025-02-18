@@ -137,7 +137,7 @@ const JokeGenerator: React.FC = () => {
     };
 
     return (
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 gap-16 sm:p-20">
             {/* Following does not work when deployed
             Solution: Have background position underneath content */}
             {/* style={{
@@ -186,13 +186,13 @@ const JokeGenerator: React.FC = () => {
                                 </div>
                             </div>
                         ) : (
-                            <div className="w-[600px] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] tracking-wider text-center text-3xl text-md text-gray-200 pt-12 bangers drop-shadow-lg ">
+                            <div className="flex flex-col justify-center w-[600px] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] tracking-wider items-center text-center text-3xl text-md text-gray-200  bangers drop-shadow-lg ">
                                 {isLoading ? (
                                     <div className="bangers">Loading...</div>
                                 ) : joke ? (
                                     joke.type === "twopart" ? (
                                         <>
-                                            <div className="pt-12">
+                                            <div className="">
                                                 {joke.setup.toUpperCase()}
                                             </div>
                                             <div className="pt-12 text-5xl hide-punchline">
@@ -200,7 +200,7 @@ const JokeGenerator: React.FC = () => {
                                             </div>
                                         </>
                                     ) : (
-                                        <div className="pt-12 text-4xl">
+                                        <div className="pt-12 text-4xl ">
                                             {joke.joke.toUpperCase()}
                                         </div>
                                     )
@@ -208,59 +208,55 @@ const JokeGenerator: React.FC = () => {
                             </div>
                         )}
                     </div>
-                    <div className="flex justify-center pt-4">
-                        {/* Fetches a random joke */}
-                        <button
-                            onClick={fetchJoke}
-                            className="font-bold bangers relative rounded border-2 bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px]">
-                            Click Me!
-                        </button>
-                        <button
-                            className={`font-bold bangers relative rounded border-2 py-1 text-black transition duration-100 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px] whitespace-nowrap ${
-                                safeMode
-                                    ? "border-red-500 bg-red-300 hover:bg-red-400 hover:text-gray-900"
-                                    : "border-green-500 bg-green-300 hover:bg-green-400 hover:text-gray-900"
-                            }`}
-                            onClick={toggleSafeMode}>
-                            {safeMode
-                                ? "Disable Safe Mode"
-                                : "Enable Safe Mode"}
-                        </button>
-                    </div>
                 </div>
-            </main>{" "}
-            {/* User can toggle which flags to blacklist*/}
-            <div>
-                {/* Safe mode toggle */}
+                <div className="flex justify-center pt-4">
+                    {/* Fetches a random joke */}
+                    <button
+                        onClick={fetchJoke}
+                        className="font-bold bangers relative rounded border-2 bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px]">
+                        Click Me!
+                    </button>
+                    <button
+                        className={`font-bold bangers relative rounded border-2 py-1 text-black transition duration-100 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px] whitespace-nowrap ${
+                            safeMode
+                                ? "border-red-500 bg-red-300 hover:bg-red-400 hover:text-gray-900"
+                                : "border-green-500 bg-green-300 hover:bg-green-400 hover:text-gray-900"
+                        }`}
+                        onClick={toggleSafeMode}>
+                        {safeMode ? "Disable Safe Mode" : "Enable Safe Mode"}
+                    </button>
+                </div>
+            </main>
 
-                {/* Safe Mode content */}
-                {safeMode ? (
-                    <div></div>
-                ) : (
-                    <footer className="flex flex-col items-center pt-4">
-                        <h3 className="text-gray-200  text-wrap text-center text-md font-[family-name:var(--font-geist-mono)] ">
-                            NOTE: The jokes can be filtered through the
-                            following buttons.
-                        </h3>
-                        <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:flex-wrap items-center justify-center pt-4">
-                            {Object.keys(flags).map((key) => (
-                                <button
-                                    key={key}
-                                    onClick={() =>
-                                        toggleFlag(key as keyof typeof flags)
-                                    }
-                                    className={`font-bold bangers relative rounded border-2 hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
-                                        flags[key as keyof typeof flags]
-                                            ? "bg-yellow-400 text-gray-900"
-                                            : "bg-gray-200 text-black"
-                                    }`}>
-                                    {key.charAt(0).toUpperCase() + key.slice(1)}
-                                </button>
-                            ))}
-                        </div>
-                    </footer>
-                )}
-            </div>
+            {/* Safe mode toggle */}
+
+            {safeMode ? (
+                <div></div>
+            ) : (
+                <footer className="flex flex-col items-center pt-4">
+                    <h3 className="text-gray-200 text-wrap text-center text-xs sm:text-sm md:text-sm lg:text-lg font-[family-name:var(--font-geist-mono)] pt-4">
+                        NOTE: The jokes can be filtered through the following
+                        buttons.
+                    </h3>
+                    {/* User can toggle which flags to blacklist*/}
+                    <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:flex-wrap items-center justify-center pt-4">
+                        {Object.keys(flags).map((key) => (
+                            <button
+                                key={key}
+                                onClick={() =>
+                                    toggleFlag(key as keyof typeof flags)
+                                }
+                                className={`font-bold bangers relative rounded border-2 hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
+                                    flags[key as keyof typeof flags]
+                                        ? "bg-yellow-400 text-gray-900"
+                                        : "bg-gray-200 text-black"
+                                }`}>
+                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                            </button>
+                        ))}
+                    </div>
+                </footer>
+            )}
         </div>
     );
 };
