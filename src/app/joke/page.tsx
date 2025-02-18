@@ -137,7 +137,7 @@ const JokeGenerator: React.FC = () => {
     };
 
     return (
-        <div className="h-screen w-screen justify-center items-center">
+        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
             {/* Following does not work when deployed
             Solution: Have background position underneath content */}
             {/* style={{
@@ -154,24 +154,22 @@ const JokeGenerator: React.FC = () => {
                 className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center brightness-75"
                 priority
             /> */}
-
-            <div className="relative h-screen w-screen flex flex-col justify-center items-center  sm:p-20">
-                <header className="gap-12">
-                    <pre className="text-[2px] text-center text-purple-300">
-                        {kellzLandArt()}
-                    </pre>
-                    <pre className="text-[3px] pt-2 text-purple-500">
-                        {" "}
-                        {jokeTitleArt()}
-                    </pre>
-                </header>
+            <header className="text-center">
+                <pre className="text-[2px] text-purple-300">
+                    {kellzLandArt()}
+                </pre>
+                <pre className="text-[3px] pt-2 text-purple-500">
+                    {jokeTitleArt()}
+                </pre>
+            </header>
+            <main className="relative flex flex-col justify-center items-center">
                 {/* When user presses Click Me! button, introduction will be 
                 replaced with the joke */}
                 <div className="grid grid-cols-1 pt-4 pb-4">
                     {/* Glass morphism container for introduction to the joke generator */}
                     <div className="flex justify-center">
                         {intro ? (
-                            <div className="w-[60%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] flex flex-col justify-center items-center border-solid border-[2px] border-[#b2a293] p-6 sm:p-8 md:p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 font-[family-name:var(--font-geist-mono)] space-y-4">
+                            <div className="w-[90%] sm:w-[60%] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] flex flex-col justify-center items-center border-solid border-[2px] border-[#b2a293] p-6 sm:p-8 md:p-12 backdrop-blur-[20px] bg-slate-600 bg-opacity-30 font-[family-name:var(--font-geist-mono)] space-y-4">
                                 <h3 className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl leading-tight text-white">
                                     Welcome to the Joke Generator! Click the
                                     button below to get a random joke. You can
@@ -188,7 +186,7 @@ const JokeGenerator: React.FC = () => {
                                 </div>
                             </div>
                         ) : (
-                            <div className="w-[600px] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px]  tracking-wider text-center text-3xl text-md text-gray-200 pt-12 bangers drop-shadow-lg ">
+                            <div className="w-[600px] h-auto min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[400px] tracking-wider text-center text-3xl text-md text-gray-200 pt-12 bangers drop-shadow-lg ">
                                 {isLoading ? (
                                     <div className="bangers">Loading...</div>
                                 ) : joke ? (
@@ -214,7 +212,7 @@ const JokeGenerator: React.FC = () => {
                         {/* Fetches a random joke */}
                         <button
                             onClick={fetchJoke}
-                            className="font-bold bangers relative rounded border-2 border-black bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px]">
+                            className="font-bold bangers relative rounded border-2 bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px]">
                             Click Me!
                         </button>
                         <button
@@ -230,42 +228,38 @@ const JokeGenerator: React.FC = () => {
                         </button>
                     </div>
                 </div>
+            </main>{" "}
+            {/* User can toggle which flags to blacklist*/}
+            <div>
+                {/* Safe mode toggle */}
 
-                {/* User can toggle which flags to blacklist*/}
-                <div>
-                    {/* Safe mode toggle */}
-
-                    {/* Safe Mode content */}
-                    {safeMode ? (
-                        <div></div>
-                    ) : (
-                        <footer className="flex flex-col items-center pt-4">
-                            <h3 className="text-gray-200  text-wrap text-center text-[1.5rem] font-[family-name:var(--font-geist-mono)] ">
-                                NOTE: The jokes can be filtered through the
-                                following buttons.
-                            </h3>
-                            <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:flex-wrap items-center justify-center pt-4">
-                                {Object.keys(flags).map((key) => (
-                                    <button
-                                        key={key}
-                                        onClick={() =>
-                                            toggleFlag(
-                                                key as keyof typeof flags
-                                            )
-                                        }
-                                        className={`font-bold bangers relative rounded border-2 border-black  hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
-                                            flags[key as keyof typeof flags]
-                                                ? "bg-yellow-400 text-gray-900"
-                                                : "bg-gray-200 text-black"
-                                        }`}>
-                                        {key.charAt(0).toUpperCase() +
-                                            key.slice(1)}
-                                    </button>
-                                ))}
-                            </div>
-                        </footer>
-                    )}
-                </div>
+                {/* Safe Mode content */}
+                {safeMode ? (
+                    <div></div>
+                ) : (
+                    <footer className="flex flex-col items-center pt-4">
+                        <h3 className="text-gray-200  text-wrap text-center text-md font-[family-name:var(--font-geist-mono)] ">
+                            NOTE: The jokes can be filtered through the
+                            following buttons.
+                        </h3>
+                        <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:flex-wrap items-center justify-center pt-4">
+                            {Object.keys(flags).map((key) => (
+                                <button
+                                    key={key}
+                                    onClick={() =>
+                                        toggleFlag(key as keyof typeof flags)
+                                    }
+                                    className={`font-bold bangers relative rounded border-2 hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
+                                        flags[key as keyof typeof flags]
+                                            ? "bg-yellow-400 text-gray-900"
+                                            : "bg-gray-200 text-black"
+                                    }`}>
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                </button>
+                            ))}
+                        </div>
+                    </footer>
+                )}
             </div>
         </div>
     );
