@@ -231,8 +231,8 @@ const JokeGenerator: React.FC = () => {
             {safeMode ? (
                 <div></div>
             ) : (
-                <footer className="flex flex-col items-center pt-4">
-                    <h3 className="text-gray-200 text-wrap text-center text-xs sm:text-sm md:text-sm lg:text-lg font-[family-name:var(--font-geist-mono)] pt-4">
+                <footer className="flex flex-col items-center">
+                    <h3 className="text-gray-200 text-wrap text-center text-xs sm:text-sm md:text-sm lg:text-lg font-[family-name:var(--font-geist-mono)]">
                         NOTE: The jokes can be filtered through the following
                         buttons.
                     </h3>
@@ -244,7 +244,7 @@ const JokeGenerator: React.FC = () => {
                                 onClick={() =>
                                     toggleFlag(key as keyof typeof flags)
                                 }
-                                className={`font-bold bangers relative rounded border-2 hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[60px] md:w-[80px] ${
+                                className={`font-bold bangers relative rounded border-2 hover:bg-yellow-400 hover:text-gray-900 py-1 transition duration-100 flex items-center justify-center gap-2 text-xs sm:text-sm md:text-sm lg:text-lg h-6 sm:h-10 px-3 sm:px-4 w-[120px] sm:w-[50px] md:w-[80px] ${
                                     flags[key as keyof typeof flags]
                                         ? "bg-yellow-400 text-gray-900"
                                         : "bg-gray-200 text-black"
