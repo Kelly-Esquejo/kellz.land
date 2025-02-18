@@ -151,7 +151,7 @@ const JokeGenerator: React.FC = () => {
                 src={bgImg.src}
                 alt={bgImg.alt}
                 fill
-                className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center brightness-75"
+                className="absolute top-0 left-0 z-[-1] object-cover w-full h-full sm:object-center "
                 priority
             />
             <header className="text-center">
