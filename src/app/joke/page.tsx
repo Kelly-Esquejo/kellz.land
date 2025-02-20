@@ -166,7 +166,7 @@ const JokeGenerator: React.FC = () => {
                 {/* <pre className="text-[4px] pt-2 text-purple-100">
                     {jokeTitleArt()}
                 </pre> */}
-                <h4 className="text-3xl font-extrabold text-center text-yellow-400 drop-shadow-md md:text-4xl animate-bounce pt-2">
+                <h4 className="text-3xl font-extrabold text-center text-yellow-400 drop-shadow-md md:text-4xl animate-bounce pt-2 font-[family-name:var(--font-geist-mono)]">
                     The Joke Generator
                 </h4>
             </header>
@@ -185,10 +185,10 @@ const JokeGenerator: React.FC = () => {
                                     to customize your experience. Enjoy!
                                 </h3>
                                 <div className="text-center space-y-2">
-                                    <h4 className="text-xl font-semibold text-red-700">
+                                    <h4 className="text-xl font-semibold text-red-500">
                                         Disclaimer:
                                     </h4>
-                                    <span className="text-white text-sm uppercase">
+                                    <span className="text-white text- uppercase">
                                         All jokes are not written by Kellz.Land
                                     </span>
                                 </div>
