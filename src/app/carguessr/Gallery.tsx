@@ -2,7 +2,7 @@
 
 import React from "react";
 import cloudinary from "cloudinary";
-import { CloudinaryImage } from "./cloudinary-image";
+import { CloudinaryImage } from "../foodle/cloudinary-image";
 
 type SearchResult = {
     public_id: string;
@@ -17,7 +17,7 @@ export default async function Gallery(params: unknown) {
     console.log(results);
 
     return (
-        <>
+        <div>
             {results.resources.map((result) => (
                 <CloudinaryImage
                     key={result.public_id}
@@ -27,6 +27,6 @@ export default async function Gallery(params: unknown) {
                     height={600}
                 />
             ))}
-        </>
+        </div>
     );
 }
