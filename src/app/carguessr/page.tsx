@@ -42,7 +42,7 @@ const CarGuessr: React.FC = () => {
             try {
                 const response = await fetch("/api/carguessr/metadata");
 
-                console.log("Metadata Results:", metadataResponses);
+                //  console.log("Metadata Results:", metadataResponses);
             } catch (error) {
                 console.error("Failed to fetch metadata:", error);
             }
