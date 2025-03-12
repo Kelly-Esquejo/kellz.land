@@ -4,20 +4,53 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import Input from "@/component/Input";
-import Script from "next/script";
+import Background from "./Background";
+import { CloudinaryImage } from "@/component/CloudinaryImage";
 // import ZoomableImage from "@/component/ZoomableImage";
-import { CldImage } from "next-cloudinary";
-import cloudinary from "cloudinary";
 
 type SearchResult = {
     public_id: string;
 };
+
 const CarGuessr: React.FC = () => {
     const [make, setMake] = useState<string>("");
     const [model, setModel] = useState<string>("");
     const [year, setYear] = useState<string>("");
-
     const [images, setImages] = useState<SearchResult[]>([]);
+    //----------------------------
+    // Fetch 3 car images
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const response = await fetch("/api/carguessr/images");
+                if (!response.ok) throw new Error("Failed to fetch images");
+                const data = await response.json();
+                setImages(data.resources);
+            } catch (err) {
+                setError("Failed to load images");
+                console.error(err);
+            }
+        };
+        fetchImages();
+    }, []);
+
+    // Fetch metadata once images are loaded
+    useEffect(() => {
+        if (images.length === 0) return; // Ensure images are available before fetching metadata
+
+        const fetchMetadata = async (imageIds: string[]) => {
+            try {
+                const response = await fetch("/api/carguessr/metadata");
+
+                //  console.log("Metadata Results:", metadataResponses);
+            } catch (error) {
+                console.error("Failed to fetch metadata:", error);
+            }
+        };
+
+        fetchMetadata(images.map((img) => img.public_id));
+    }, [images]); // Runs when `images` updates
+
     const [error, setError] = useState<string | null>(null);
 
     const handleMakeChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,44 +72,34 @@ const CarGuessr: React.FC = () => {
         }
         setError(null); // Clear error if inputs are valid
     };
-    useEffect(() => {
-        async function fetchImages() {
-            try {
-                const response = await fetch("/api/carguessr");
-                if (!response.ok) {
-                    throw new Error("Failed to fetch images");
-                }
-                const data = await response.json();
-                setImages(data.resources);
-            } catch (error) {
-                setError("Error fetching images");
-            }
-        }
 
-        fetchImages();
-    }, []);
     return (
         <div className="flex flex-col items-center justify-center h-screen w-full gap-4 pt-4 pb-4">
-            <h1 className="font-[family-name:var(--font-geist-mono)] mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+            {/* <Background /> */}
+            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Car Guessr
             </h1>
 
+            {/* Display car image */}
             <div className="relative overflow-hidden flex justify-center items-center">
-                {images.length > 0 &&
-                    images.map((result) => (
-                        <Image
-                            key={result.public_id}
-                            src={`https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/${result.public_id}.jpg`}
+                {images.length > 0 ? (
+                    images.map((image) => (
+                        <CloudinaryImage
+                            key={image.public_id}
+                            src={image.public_id}
                             alt="Car Image"
                             width={900}
                             height={600}
                         />
-                    ))}
+                    ))
+                ) : (
+                    <p>Loading images...</p>
+                )}
             </div>
             <div className="h-auto flex flex-col items-center justify-center gap-4 w-full pl-4 pr-4">
                 <form className="flex md gap-4 w-full items-center justify-center">
                     <Input
-                        labelClassName="block uppercase tracking-wide text-gray-950 sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2 text-gray-300"
+                        labelClassName="block uppercase tracking-wide text-gray-250 sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2"
                         inputClassName="shadow appearance-none border rounded w-full  sm:w-auto text-xs sm:text-sm md:text-base max-w-xs py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="text"
                         label="Make"
@@ -87,7 +110,7 @@ const CarGuessr: React.FC = () => {
                         placeholder="Shelby"
                     />
                     <Input
-                        labelClassName="block uppercase tracking-wide text-gray-950  sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2 text-gray-300"
+                        labelClassName="block uppercase tracking-wide text-gray-250  sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2"
                         inputClassName="shadow appearance-none border rounded w-full  sm:w-auto text-xs sm:text-sm md:text-base max-w-xs py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="text"
                         label="Model"
@@ -98,7 +121,7 @@ const CarGuessr: React.FC = () => {
                         placeholder="427 Cobra"
                     />
                     <Input
-                        labelClassName="block uppercase tracking-wide text-gray-950  sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2 text-gray-300"
+                        labelClassName="block uppercase tracking-wide text-gray-250  sm:w-auto text-xs sm:text-sm md:text-base font-bold mb-2"
                         inputClassName="shadow appearance-none border rounded w-full  sm:w-auto text-xs sm:text-sm md:text-base max-w-xs py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="number"
                         label="Year"
@@ -110,12 +133,10 @@ const CarGuessr: React.FC = () => {
                     />
                 </form>
                 <footer className="flex flex-wrap gap-4 justify-center w-full">
-                    <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
+                    <button className="bg-transparent hover:bg-blue-500 text-gray-250 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
                         Submit
                     </button>
-                    <button
-                        // onClick={getRandomCar}
-                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
+                    <button className="bg-transparent hover:bg-blue-500 text-gray-250 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded max-w-xs w-full sm:w-auto text-xs sm:text-sm md:text-base">
                         New Car
                     </button>
                 </footer>

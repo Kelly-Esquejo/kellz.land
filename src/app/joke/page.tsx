@@ -145,9 +145,7 @@ const JokeGenerator: React.FC = () => {
             />
             <header className="text-center">
                 <pre className="text-[4px] text-purple-100">
-                    <Link
-                        href="https://kelly-esquejo.github.io/kellz.land/"
-                        className="">
+                    <Link href="https://kellz-land.netlify.app/" className="">
                         {kellzLandArt()}
                     </Link>
                 </pre>
@@ -209,7 +207,8 @@ const JokeGenerator: React.FC = () => {
                     {/* Fetches a random joke */}
                     <button
                         onClick={fetchJoke}
-                        className="font-bold bangers relative rounded border-2 bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px]">
+                        className="font-bold bangers relative rounded border-2 bg-gray-200 py-1 text-black transition duration-100 hover:bg-yellow-400 hover:text-gray-900 gap-2 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-[150px] sm:w-[180px]"
+                    >
                         Click Me!
                     </button>
                     <button
@@ -218,7 +217,8 @@ const JokeGenerator: React.FC = () => {
                                 ? "border-red-500 bg-red-300 hover:bg-red-400 hover:text-gray-900"
                                 : "border-green-500 bg-green-300 hover:bg-green-400 hover:text-gray-900"
                         }`}
-                        onClick={toggleSafeMode}>
+                        onClick={toggleSafeMode}
+                    >
                         {safeMode ? "Disable Safe Mode" : "Enable Safe Mode"}
                     </button>
                 </div>
@@ -244,7 +244,8 @@ const JokeGenerator: React.FC = () => {
                                     flags[key as keyof typeof flags]
                                         ? "bg-yellow-400 text-gray-900"
                                         : "bg-gray-200 text-black"
-                                }`}>
+                                }`}
+                            >
                                 {key.charAt(0).toUpperCase() + key.slice(1)}
                             </button>
                         ))}

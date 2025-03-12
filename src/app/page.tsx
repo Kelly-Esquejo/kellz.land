@@ -64,7 +64,8 @@ export default function Home() {
                     <li className="mb-2 ">
                         <a
                             className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold"
-                            href="https://neal.fun/">
+                            href="https://neal.fun/"
+                        >
                             https://neal.fun/
                         </a>
                     </li>
@@ -77,7 +78,8 @@ export default function Home() {
                         className="flex items-center gap-2 hover:underline hover:underline-offset-4"
                         href="https://www.linkedin.com/in/kelly-esquejo/"
                         target="_blank"
-                        rel="noopener noreferrer">
+                        rel="noopener noreferrer"
+                    >
                         <Image
                             unoptimized
                             src="window.svg"
@@ -91,7 +93,8 @@ export default function Home() {
                         className="flex items-center gap-2 hover:underline hover:underline-offset-4"
                         href="https://github.com/Kelly-Esquejo/kellz.fun"
                         target="_blank"
-                        rel="noopener noreferrer">
+                        rel="noopener noreferrer"
+                    >
                         <Image
                             unoptimized
                             src="globe.svg"
