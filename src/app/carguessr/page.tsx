@@ -4,7 +4,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import Input from "@/component/Input";
-import Background from "./Background";
 import { CloudinaryImage } from "@/component/CloudinaryImage";
 // import ZoomableImage from "@/component/ZoomableImage";
 
@@ -17,6 +16,8 @@ const CarGuessr: React.FC = () => {
     const [model, setModel] = useState<string>("");
     const [year, setYear] = useState<string>("");
     const [images, setImages] = useState<SearchResult[]>([]);
+    const [metadata, setMetadata] = useState(null);
+
     //----------------------------
     // Fetch 3 car images
     useEffect(() => {
@@ -38,17 +39,20 @@ const CarGuessr: React.FC = () => {
     useEffect(() => {
         if (images.length === 0) return; // Ensure images are available before fetching metadata
 
-        const fetchMetadata = async (imageIds: string[]) => {
+        const fetchMetadata = async () => {
             try {
                 const response = await fetch("/api/carguessr/metadata");
-
-                //  console.log("Metadata Results:", metadataResponses);
-            } catch (error) {
-                console.error("Failed to fetch metadata:", error);
+                if (!response.ok)
+                    throw new Error("Failed to fetch image metadata");
+                const data = await response.json();
+                setMetadata(data);
+            } catch (err) {
+                setError("Failed to fetch metadata");
+                console.error(err);
             }
         };
 
-        fetchMetadata(images.map((img) => img.public_id));
+        fetchMetadata();
     }, [images]); // Runs when `images` updates
 
     const [error, setError] = useState<string | null>(null);
@@ -95,6 +99,10 @@ const CarGuessr: React.FC = () => {
                 ) : (
                     <p>Loading images...</p>
                 )}
+                <div>
+                    <h2>Metadata</h2>
+                    <pre>{JSON.stringify(metadata, null, 2)}</pre>
+                </div>
             </div>
             <div className="h-auto flex flex-col items-center justify-center gap-4 w-full pl-4 pr-4">
                 <form className="flex md gap-4 w-full items-center justify-center">

@@ -1,29 +1,14 @@
-import { NextResponse } from "next/server";
 import cloudinary from "cloudinary";
 
-export async function GET(
-    req: Request,
-    { params }: { params: { fieldId: string } }
-) {
+export async function GET() {
     try {
-        const { fieldId } = params; // Extract the fieldId from URL
-        if (!fieldId) {
-            return NextResponse.json(
-                { error: "Missing fieldId" },
-                { status: 400 }
-            );
-        }
+        const results = await cloudinary.v2.api.resource("IMG_996_khvewz");
+        // Extract only the metadata field
+        const metadata = results.metadata;
 
-        const result = await cloudinary.v2.api.metadata_field_by_field_id(
-            fieldId
-        );
-
-        return NextResponse.json(result, { status: 200 });
+        return Response.json(metadata, { status: 200 });
     } catch (error) {
-        console.error("Error fetching metadata field:", error);
-        return NextResponse.json(
-            { error: "Failed to fetch metadata field" },
-            { status: 500 }
-        );
+        console.error("Cloudinary API Error:", error);
+        return Response.json({ error: error.message }, { status: 500 });
     }
 }
